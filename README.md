@@ -84,20 +84,11 @@ Choose **Game 1** or **Game 2** in the menu. Play in a well-lit room, facing the
 | `R` | Restart after Game Over (Game 1) |
 | `K` | Close the game and return to the menu |
 
-## Challenges
-
-- **Calibrating the mouth threshold.** Faces differ in shape and sit at different distances from the camera. Dividing the lip gap by the mouth width made the ratio distance-independent, and the 0.20 threshold took several rounds of testing to work reliably on different facial shapes. Averaging groups of lip landmarks instead of using just two points also made the measurement steadier.
-- **Accidental selections in Game 2.** Using the hand position alone made the game select objects whenever a hand passed over them. Requiring a closed fist as the confirmation gesture fixed this.
-- **Face tracking in poor conditions.** Face detection suffers in bad lighting or awkward posture, so Game 1 includes a hand mode that the player can switch to with the `C` key.
-- **Transparent PNG overlays.** Some PNG files without an alpha channel produced transparency artefacts when drawn with `cvzone.overlayPNG()`.
-- **Unstable landmarks at the screen edge.** Landmark 9, used as the pointer in Game 2, becomes unreliable when the hand is partly outside the camera view.
-- **Blocking the Tkinter menu.** A running game blocks the Tkinter main loop because both run in the same thread, so the menu is unresponsive until the game closes.
-- **Placing objects on different screens.** Positioning objects dynamically so they look right on different devices and resolutions was difficult. Screen size is now set in one shared base class, but the layout still isn't fully adaptive.
-
 ## Limitations
 
 - Detection gets worse in low light, and the face must be clearly visible in face mode.
 - A mouth turned sideways can give a borderline ratio (around 0.18 to 0.22), so the result varies.
+- The game may not run well at every resolution. Object positions and sizes are calculated for a fixed frame size, so other resolutions can misplace objects or cut off the interface. Recommended: 1280×720 (720p), which is the default in base/base_games.py. Use a 720p-capable webcam and a screen of at least that size.
 - Fall speed is fixed at 5 px per frame, with no difficulty levels.
 - There is no audio and no multiplayer mode.
 - The system uses pre-trained MediaPipe models and rule-based gesture logic. It does not train its own models.
@@ -120,9 +111,3 @@ Choose **Game 1** or **Game 2** in the menu. Play in a well-lit room, facing the
 - Fares Abdelrezek Benabdelmoumene
 
 Supervised by Mr. Mohammed Hakim Bendiabdallah. Department of Mathematics and Computer Science, Ain Temouchent University – Belhadj Bouchaib, Algeria.
-
-## References
-
-1. C. Lugaresi et al., "MediaPipe: A Framework for Building Perception Pipelines," arXiv:1906.08172, 2019.
-2. F. Zhang et al., "MediaPipe Hands: On-device Real-time Hand Tracking," ECCV Workshop on CV for AR/VR, 2020.
-3. G. Bradski and A. Kaehler, *Learning OpenCV*, O'Reilly, 2008.
