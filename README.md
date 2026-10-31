@@ -84,6 +84,17 @@ Choose **Game 1** or **Game 2** in the menu. Play in a well-lit room, facing the
 | `R` | Restart after Game Over (Game 1) |
 | `K` | Close the game and return to the menu |
 
+## Key Parameters & Metrics
+
+| Parameter                    | Value     | Description |
+|-----------------------------|-----------|-----------|
+| Mouth Open Threshold        | **0.20**  | Mouth is considered open when `mouth_gap / mouth_width > 0.20` |
+| Selection Wait Time (Game 2)| **2.0 s** | Waiting time after a correct/wrong selection before the next round |
+| Detection Confidence        | 0.5       | MediaPipe Hands `min_detection_confidence` |
+| Tracking Confidence         | 0.3       | MediaPipe Hands `min_tracking_confidence` |
+| Frame Resolution            | 1280×720  | Default resolution used in the games |
+| Object Fall Speed (Game 1)  | 5 px/frame| Speed of falling objects |
+
 ## Limitations
 
 - Detection gets worse in low light, and the face must be clearly visible in face mode.
